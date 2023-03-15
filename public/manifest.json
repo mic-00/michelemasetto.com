@@ -1,0 +1,9 @@
+{
+  "short_name": "Michele Masetto",
+  "name": "Michele Masetto's portfolio website",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
