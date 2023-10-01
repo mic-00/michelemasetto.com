@@ -1,10 +1,9 @@
-import {Box, Container, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Box, Container, Typography, useTheme} from "@mui/material";
 import sign from './sign.png';
 
 function Footer() {
 
   const theme = useTheme();
-  const print = useMediaQuery('@media print');
 
   return (
       <Box component="footer" sx={{
