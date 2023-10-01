@@ -1,9 +1,10 @@
+import angular_intermediate_certificate from "./assets/angular_intermediate_certificate.pdf";
 import degree from "./assets/degree.pdf";
 import diploma from "./assets/diploma.pdf";
 import unreal_engine_4 from "./assets/unreal_engine_4.pdf";
 import {List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
 import {Download} from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 
 function Certifications() {
@@ -19,6 +20,9 @@ function Certifications() {
   }, {
     name: t('certifications', { returnObjects: true })[2],
     href: unreal_engine_4
+  }, {
+    name: t('certifications', { returnObjects: true })[3],
+    href: angular_intermediate_certificate
   }];
 
   return (
