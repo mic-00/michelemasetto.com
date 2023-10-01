@@ -1,4 +1,5 @@
 import TimelineOppositeContent, {timelineOppositeContentClasses} from "@mui/lab/TimelineOppositeContent";
+import {timelineItemClasses} from "@mui/lab/TimelineItem";
 import {Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
 import {CalendarMonth, Place, Work} from "@mui/icons-material";
 import {List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
@@ -24,14 +25,26 @@ const workTimeline = [{
   end: 'Settembre 2022',
   content: 'Tirocinio curriculare universitario svolto al termine del percorso di studi. Sono state svolte le ' +
       'seguenti attività: analisi, progettazione e sviluppo di funzionalità mancanti in un sistema di videoispezione.'
+}, {
+  name: 'Full-stack developer',
+  place: 'Scai Itec, Padova (PD)',
+  start: 'Maggio 2023',
+  end: '*'
 }];
 
 function WorkExperiences() {
   return (
       <Timeline sx={{
-        [`& .${timelineOppositeContentClasses.root}`]: {
+        '&': {
+          height: '100%',
+          margin: 0,
+          justifyContent: 'space-between'
+        }, [`& .${timelineOppositeContentClasses.root}`]: {
           flex: 0,
-        },
+          padding: 0
+        }, [`& .${timelineItemClasses.root}`]: {
+          flexGrow: 1
+        }
       }}>
         {workTimeline.map((it, key) => (
             <TimelineItem key={key}>

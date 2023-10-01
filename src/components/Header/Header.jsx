@@ -2,17 +2,27 @@ import {
   AppBar,
   Avatar,
   Box,
-  Button, Grid, IconButton,
+  Button, FormControlLabel, FormGroup, Grid, IconButton,
   List,
   ListItem,
   ListItemIcon, ListItemText, styled, Switch,
   Toolbar,
   Typography, useMediaQuery, useTheme
 } from '@mui/material';
+import {
+  Cake,
+  DirectionsCar,
+  GitHub,
+  Language,
+  LinkedIn,
+  Mail,
+  Phone,
+  Place,
+  Translate
+} from '@mui/icons-material';
+import { useSelector, useStore } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import profile from './1674239272817.jpg';
-import {Cake, DirectionsCar, GitHub, Language, LinkedIn, Mail, Phone, Place, Translate} from "@mui/icons-material";
-import {useSelector, useStore} from "react-redux";
-
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -68,13 +78,14 @@ function Header() {
   const store = useStore();
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const { t } = useTranslation();
 
   return (
       <AppBar position="static" sx={{ paddingY: 2 }}>
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
           {md && (
               <Avatar src={profile} sx={{
-                width: '8rem',
+                width: '9.5rem',
                 height: 'auto',
                 marginRight: 4,
                 borderRadius: '50%'
@@ -84,12 +95,31 @@ function Header() {
           )}
           <Box sx={{ flexGrow: 1 }}>
             <Typography variant="h1">
-              Michele Masetto
+              Michele Masetto          
             </Typography>
+            <FormGroup sx={{
+              position: 'absolute',
+              top: 0,
+              right: 32
+            }}>
+              <FormControlLabel
+                  control={
+                      <MaterialUISwitch
+                          checked={!lightMode}
+                          onChange={() => store.dispatch({ type: 'lightMode' })}
+                      />
+                  }
+                  label={!md
+                      ? null
+                      : lightMode ? t('dark_mode') : t('light_mode')
+                  }
+                  labelPlacement="start"
+              />
+            </FormGroup> 
             <List>
               <ListItem>
                 <ListItemIcon><Place /></ListItemIcon>
-                <ListItemText>Via del Convento 35, San Pietro Viminario (PD), Italia</ListItemText>
+                <ListItemText>{ t('residence') }</ListItemText>
               </ListItem>
               <ListItem>
                 <ListItemIcon><Cake /></ListItemIcon>
@@ -101,7 +131,7 @@ function Header() {
               </ListItem>
               <ListItem>
                 <ListItemIcon><Translate /></ListItemIcon>
-                <ListItemText>Italiano (madrelingua) / English (B2)</ListItemText>
+                <ListItemText>{ t('languages') }</ListItemText>
               </ListItem>
             </List>
           </Box>

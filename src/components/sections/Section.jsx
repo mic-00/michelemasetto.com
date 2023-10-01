@@ -1,4 +1,4 @@
-import {Paper, Typography, useTheme} from '@mui/material';
+import {Box, Paper, Typography, useTheme} from '@mui/material';
 import {AnimationOnScroll} from "react-animation-on-scroll";
 
 
@@ -19,7 +19,7 @@ function Section({ title, children }) {
           {title && (
               <Paper sx={{
                 display: 'inline-block',
-                position: 'relative',
+                position: 'absolute',
                 top: theme.spacing(-2),
                 paddingLeft: 0.5,
                 paddingRight: 1
@@ -29,7 +29,9 @@ function Section({ title, children }) {
                 </Typography>
               </Paper>
           )}
-          {children}
+          <Box sx={{ height: '100%', paddingTop: 4 }}>
+            {children}
+          </Box>
         </Paper>
       </AnimationOnScroll>
   );

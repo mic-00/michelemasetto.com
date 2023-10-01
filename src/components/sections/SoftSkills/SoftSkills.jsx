@@ -1,6 +1,6 @@
-import {Chip, Grid, Stack} from "@mui/material";
+import {Chip, Grid} from "@mui/material";
 
-const softSkills = [ "Team working", "Time management", "Critical thinking", "Decision making", "Troubleshooting", "Communication" ];
+const softSkills = [ 'Team working', 'Time management', 'Critical thinking', 'Decision making', 'Troubleshooting', 'Communication' ];
 
 function SoftSkills() {
   return (

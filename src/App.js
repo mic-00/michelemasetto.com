@@ -6,17 +6,17 @@ import {
   CssBaseline, Grid,
   ThemeProvider, useMediaQuery
 } from '@mui/material';
-import AboutMe from './pages/AboutMe';
-import Certifications from "./pages/Certifications";
-import Education from "./pages/Education";
-import WorkExperiences from "./pages/WorkExperiences";
-import Header from './components/Header/Header';
+import Header from './components/Header';
 import Footer from './components/Footer';
-import Section from "./components/Section";
+import Section from "./components/sections/Section";
+import AboutMe from './components/sections/AboutMe';
+import Certifications from "./components/sections/Certifications";
+import Education from "./components/sections/Education";
+import HardSkills from "./components/sections/HardSkills";
+import SoftSkills from "./components/sections/SoftSkills";
+import WorkExperiences from "./components/sections/WorkExperiences";
 import {lightTheme, darkTheme} from './theme';
 import 'animate.css/animate.min.css';
-import SoftSkills from "./pages/SoftSkills";
-import HardSkills from "./pages/HardSkills";
 
 const sections = [{
   title: 'Sommario',
@@ -53,46 +53,41 @@ const sections = [{
 function App() {
 
   const lightMode = useSelector(state => state.lightMode);
-  let theme = useMemo(
-      () => {
-        let t = createTheme(lightMode ? lightTheme : darkTheme);
-        return createTheme(lightMode ? lightTheme : darkTheme, {
-          typography: {
-            h1: {
-              fontWeight: 600,
-              fontSize: '3rem',
-              [t.breakpoints.down('md')]: { fontSize: '2.5rem' },
-              [t.breakpoints.only('xs')]: {fontSize: '2.25rem'}
-            },
-            h2: {
-              fontWeight: 600,
-              fontSize: '2.5rem',
-              [t.breakpoints.down('md')]: { fontSize: '2.25rem' },
-              [t.breakpoints.only('xs')]: {fontSize: '2.125rem'}
-            }, h3: {
-              fontWeight: 600,
-              fontSize: '2.25rem',
-              [t.breakpoints.down('md')]: { fontSize: '2.125rem' },
-              [t.breakpoints.only('xs')]: {fontSize: '2.0625rem'}
-            }, h4: {
-              fontWeight: 600,
-              fontSize: '2.125rem',
-              [t.breakpoints.down('md')]: { fontSize: '2.0625rem' },
-              [t.breakpoints.only('xs')]: {fontSize: '2.0312rem'}
-            }
-          }});
-      },
-      [lightMode]
-  );
-
+  let theme = useMemo(() => {
+    let t = createTheme(lightMode ? lightTheme : darkTheme);
+    return createTheme(lightMode ? lightTheme : darkTheme, {
+      typography: {
+        h1: {
+          fontWeight: 600,
+          fontSize: '2.5rem',
+          [t.breakpoints.down('md')]: { fontSize: '2rem' },
+          [t.breakpoints.only('xs')]: { fontSize: '1.75em' }
+        }, h2: {
+          fontWeight: 600,
+          fontSize: '2rem',
+          [t.breakpoints.down('md')]: { fontSize: '1.75rem' },
+          [t.breakpoints.only('xs')]: { fontSize: '1.625rem' }
+        }, h3: {
+          fontWeight: 600,
+          fontSize: '1.75rem',
+          [t.breakpoints.down('md')]: { fontSize: '1.625rem' },
+          [t.breakpoints.only('xs')]: { fontSize: '1.5625rem' }
+        }, h4: {
+          fontWeight: 600,
+          fontSize: '1.625rem',
+          [t.breakpoints.down('md')]: { fontSize: '1.5625rem' },
+          [t.breakpoints.only('xs')]: { fontSize: '1.5313rem' }
+        }
+      }});
+  }, [lightMode]);
   const md = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <Box sx={{ paddingX: 2, paddingY: 4 }}>
-          <Grid container rowSpacing={md ? 4 : 2} columnSpacing={md ? 2 : 1} alignContent="stretch">
+        <Box sx={{ paddingX: 1, paddingY: 4 }}>
+          <Grid container rowSpacing={4} columnSpacing={md ? 2 : 1} alignContent="stretch">
             {sections.map((section, key) => (
                 <Grid
                     item

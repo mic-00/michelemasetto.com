@@ -1,0 +1,25 @@
+{
+    "dark_mode": "Enable dark mode",
+    "light_mode": "Enable light mode",
+    "residence": "Padua, Italy",
+    "languages": "Italian (mother tongue) / English (B2)",
+
+    "about_me": [
+        "I'm a passionate full-stack developer.",
+        "My interest in IT is the result of a passion that I have cultivated since I was young.",
+        "In my free time I play volleyball, an activity I've been doing for over 10 years.",
+        "This allowed me to develop a strong sense of team spirit and belonging to the group. I currently play for Monselice Volley '86 in the regional Serie C championship."
+    ],
+    "certifications": [
+        "High school diploma",
+        "Information technologies bachelor degree",
+        "Unreal Engine 4 course"
+    ],
+    "education": [{
+        "name": "High school diploma",
+        "start": "September 2014",
+        "end": "July 2019",
+        "place": "J. F. Kennedy Technical Institute, Monselice (PD)",
+        "description": "1st level specialization diploma in computer science and technology DS1."
+    }]
+}

@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.1a2e9d8f.css",
-    "main.js": "/static/js/main.dac6b4d1.js",
+    "main.css": "/static/css/main.041bfab1.css",
+    "main.js": "/static/js/main.5bb5998d.js",
     "static/media/unreal_engine_4.pdf": "/static/media/unreal_engine_4.7271b7ebe10f80a5dccb.pdf",
+    "static/media/diploma.pdf": "/static/media/diploma.07009ef82e828318bf56.pdf",
     "static/media/degree.pdf": "/static/media/degree.2544597ac02f0c35432a.pdf",
     "static/media/1674239272817.jpg": "/static/media/1674239272817.0d344badc01c89b14152.jpg",
     "static/media/sign.png": "/static/media/sign.ef246e03b15e7cafe7c9.png",
     "index.html": "/index.html",
-    "main.1a2e9d8f.css.map": "/static/css/main.1a2e9d8f.css.map",
-    "main.dac6b4d1.js.map": "/static/js/main.dac6b4d1.js.map"
+    "main.041bfab1.css.map": "/static/css/main.041bfab1.css.map",
+    "main.5bb5998d.js.map": "/static/js/main.5bb5998d.js.map"
   },
   "entrypoints": [
-    "static/css/main.1a2e9d8f.css",
-    "static/js/main.dac6b4d1.js"
+    "static/css/main.041bfab1.css",
+    "static/js/main.5bb5998d.js"
   ]
 }

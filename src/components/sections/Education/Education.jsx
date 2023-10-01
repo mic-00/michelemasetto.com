@@ -1,35 +1,38 @@
 import TimelineOppositeContent, {timelineOppositeContentClasses} from "@mui/lab/TimelineOppositeContent";
+import {timelineItemClasses} from "@mui/lab/TimelineItem";
 import {Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
 import {CalendarMonth, Place, WorkspacePremium} from "@mui/icons-material";
 import {List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
+import { useTranslation } from "react-i18next";
 
-const eduTimeline = [{
-  name: 'Diploma di istruzione superiore',
-  start: '2014',
-  end: '2019',
-  place: 'Istituto Tecnico J. F. Kennedy, Monselice (PD)'
-}, {
-  name: 'Laurea triennale in Informatica',
-  start: 'Ottobre 2019',
-  end: 'Dicembre 2022',
-  place: 'Dipartimento di Matematica Tullio-Levi Civita, Università degli Studi di Padova, Padova (PD)'
-}];
 
 function Education() {
+
+  const { t } = useTranslation();
+
+  const timeline = t('education', { returnObjects: true });
+
   return (
       <Timeline sx={{
-        [`& .${timelineOppositeContentClasses.root}`]: {
+        '&': {
+          height: '100%',
+          margin: 0,
+          justifyContent: 'space-between'
+        }, [`& .${timelineOppositeContentClasses.root}`]: {
           flex: 0,
-        },
+          padding: 0
+        }, [`& .${timelineItemClasses.root}`]: {
+          flexGrow: 1
+        }
       }}>
-        {eduTimeline.map((it, key) => (
+        {timeline.map((it, key) => (
             <TimelineItem key={key}>
               <TimelineOppositeContent></TimelineOppositeContent>
               <TimelineSeparator>
                 <TimelineDot color="primary">
                   <WorkspacePremium fontSize="small" />
                 </TimelineDot>
-                {key !== eduTimeline.length - 1 && <TimelineConnector />}
+                {key !== timeline.length - 1 && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>
                 <Typography variant="h3">
@@ -49,8 +52,8 @@ function Education() {
                       </ListItem>
                   )}
                 </List>
-                {it.content && (
-                    <Typography>{it.content}</Typography>
+                {it.description && (
+                    <Typography>{it.description}</Typography>
                 )}
               </TimelineContent>
             </TimelineItem>

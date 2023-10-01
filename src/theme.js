@@ -27,9 +27,9 @@ const defaultTheme = {
   },
   spacing: (value) => `${value / 2}rem`,
   typography: {
-    allVariants: {
-      fontFamily: 'Calibri, Helvetica, Verdana, Trebuchet MS, Lato, sans-serif'
-    }
+    htmlFontSize: 16,
+    fontSize: 14,
+    fontFamily: 'Calibri, Helvetica, Verdana, Trebuchet MS, Lato, sans-serif'
   }
 }
 

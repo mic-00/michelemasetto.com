@@ -1,4 +1,4 @@
-import {Box, Container, Grid, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Box, Container, Typography, useMediaQuery, useTheme} from "@mui/material";
 import sign from './sign.png';
 
 function Footer() {

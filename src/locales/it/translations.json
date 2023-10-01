@@ -1,0 +1,31 @@
+{
+    "dark_mode": "Abilita modalità dark",
+    "light_mode": "Abilita modalità light",
+    "residence": "Padova, Italia",
+    "languages": "Italiano (madrelingua) / Inglese (B2)",
+
+    "about_me": [
+        "Sono un appassionato sviluppatore full-stack.",
+        "Il mio interesse per l'informatica è frutto di una passione che coltivo fin da quando ero giovane.",
+        "Nel tempo libero pratico pallavolo, un'attività a cui mi dedico da oltre 10 anni.",
+        "Questo mi ha permesso di sviluppare un forte senso di spirito di squadra e di appartenenza al gruppo. Attualmente milito presso la società Monselice Volley '86 nel campionato regionale di Serie C."
+    ],
+    "certifications": [
+        "Diploma di istruzione superiore",
+        "Laurea triennale in Informatica",
+        "Corso Unreal Engine 4"
+    ],
+    "education": [{
+        "name": "Diploma di istruzione superiore",
+        "start": "Settembre 2014",
+        "end": "Luglio 2019",
+        "place": "Istituto Tecnico J. F. Kennedy, Monselice (PD)",
+        "description": "Diploma di specializzazione di 1° livello in informatica e tecnologia DS1."
+    }, {
+        "name": "Laurea triennale in Informatica",
+        "start": "Ottobre 2019",
+        "end": "Dicembre 2022",
+        "place": "Dipartimento di Matematica Tullio-Levi Civita, Università degli Studi di Padova, Padova (PD)",
+        "description": "Dopo aver conseguito il titolo di tecnico superiore, ho scelto di proseguire gli studi iscrivendomi al corso di laurea in Informatica presso l'Università di Padova. Durante questo periodo ho avuto modo di approfondire alcuni concetti e di apprenderne di nuovi, inoltre ho svolto numerosi progetti, sia singolarmente che in gruppo. Questo percorso si è concluso con lo svolgimento di un progetto commissionato da un'importante azienda che opera a livello nazionale e non solo, e per finire con un tirocinio di 600 ore."
+    }]
+}
