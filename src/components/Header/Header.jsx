@@ -137,53 +137,58 @@ function Header() {
           </Box>
         </Toolbar>
         {md && (
-            <Grid container spacing={2} sx={{ paddingX: 2 }}>
-              <Grid item>
+            <Grid container flexWrap="nowrap" spacing={2} sx={{ paddingX: 2 }}>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="https://www.michelemasetto.com"
                     target="_blank"
                     startIcon={<Language />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  michelemasetto.com
+                  <Typography noWrap variant="button">michelemasetto.com</Typography>
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="mailto:michele.masetto@gmail.com"
                     startIcon={<Mail />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  michele.masetto@gmail.com
+                  <Typography noWrap variant="button">michele.masetto@gmail.com</Typography>
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="tel:+393401619476"
                     startIcon={<Phone />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  +39 340 161 9476
+                  <Typography noWrap variant="button">+39 340 161 9476</Typography>
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="https://www.linkedin.com/in/michele-masetto-994281261/"
                     target="_blank"
                     startIcon={<LinkedIn />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  linkedin.com/in/michele-masetto-994281261
+                  <Typography noWrap variant="button">linkedin.com/in/michele-masetto-994281261</Typography>
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="https://www.github.com/mic-00/"
                     target="_blank"
                     startIcon={<GitHub />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  github.com/mic-00
+                  <Typography noWrap variant="button">github.com/mic-00</Typography>
                 </Button>
               </Grid>
             </Grid>
