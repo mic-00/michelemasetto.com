@@ -18,11 +18,16 @@ import {
   Mail,
   Phone,
   Place,
-  Translate
+  Translate,
+  VolumeOff,
+  VolumeUp
 } from '@mui/icons-material';
+import { useState } from 'react';
 import { useSelector, useStore } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import profile from './1674239272817.jpg';
+import { themeUtils } from 'themes';
+import christmasAudio from './assets/1645874023710.mp3';
+import profile from './assets/1674239272817.jpg';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -71,17 +76,19 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-
 function Header() {
 
   const lightMode = useSelector((state) => state.lightMode);
+  const [muted, setMuted] = useState(true);
   const store = useStore();
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
+
   const { t } = useTranslation();
 
   return (
       <AppBar position="static" sx={{ paddingY: 2 }}>
+        {themeUtils.isChristmas() && <audio src={christmasAudio} muted={muted} autoPlay loop />}
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
           {md && (
               <Avatar src={profile} sx={{
@@ -100,7 +107,8 @@ function Header() {
             <FormGroup sx={{
               position: 'absolute',
               top: 0,
-              right: 32
+              right: 32,
+              zIndex: 9999
             }}>
               <FormControlLabel
                   control={
@@ -115,6 +123,15 @@ function Header() {
                   }
                   labelPlacement="start"
               />
+              {themeUtils.isChristmas() && <FormControlLabel
+                  control={
+                      <IconButton onClick={() => setMuted(!muted)}>
+                        {muted ? <VolumeOff /> : <VolumeUp />}
+                      </IconButton>
+                  }
+                  label={muted ? t('audio_on') : t('audio_off')}
+                  labelPlacement="start"
+              />}
             </FormGroup> 
             <List>
               <ListItem>
@@ -137,53 +154,58 @@ function Header() {
           </Box>
         </Toolbar>
         {md && (
-            <Grid container spacing={2} sx={{ paddingX: 2 }}>
-              <Grid item>
+            <Grid container flexWrap="nowrap" spacing={2} sx={{ paddingX: 2 }}>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="https://www.michelemasetto.com"
                     target="_blank"
                     startIcon={<Language />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  michelemasetto.com
+                  <Typography noWrap variant="button">michelemasetto.com</Typography>
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="mailto:michele.masetto@gmail.com"
                     startIcon={<Mail />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  michele.masetto@gmail.com
+                  <Typography noWrap variant="button">michele.masetto@gmail.com</Typography>
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="tel:+393401619476"
                     startIcon={<Phone />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  +39 340 161 9476
+                  <Typography noWrap variant="button">+39 340 161 9476</Typography>
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="https://www.linkedin.com/in/michele-masetto-994281261/"
                     target="_blank"
                     startIcon={<LinkedIn />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  linkedin.com/in/michele-masetto-994281261
+                  <Typography noWrap variant="button">linkedin.com/in/michele-masetto-994281261</Typography>
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item zeroMinWidth flexBasis="0" flexGrow="1">
                 <Button
                     href="https://www.github.com/mic-00/"
                     target="_blank"
                     startIcon={<GitHub />}
                     color="inherit"
+                    sx={{ width: '100%' }}
                 >
-                  github.com/mic-00
+                  <Typography noWrap variant="button">github.com/mic-00</Typography>
                 </Button>
               </Grid>
             </Grid>

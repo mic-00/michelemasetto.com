@@ -15,8 +15,9 @@ import Education from "./components/sections/Education";
 import HardSkills from "./components/sections/HardSkills";
 import SoftSkills from "./components/sections/SoftSkills";
 import WorkExperiences from "./components/sections/WorkExperiences";
-import {lightTheme, darkTheme} from './theme';
+import {christmasTheme, darkTheme, lightTheme, themeUtils} from './themes';
 import 'animate.css/animate.min.css';
+
 
 const sections = [{
   title: 'Sommario',
@@ -52,10 +53,11 @@ const sections = [{
 
 function App() {
 
-  const lightMode = useSelector(state => state.lightMode);
+  const isLight = useSelector(state => state.lightMode);
+  
   let theme = useMemo(() => {
-    let t = createTheme(lightMode ? lightTheme : darkTheme);
-    return createTheme(lightMode ? lightTheme : darkTheme, {
+    let t = createTheme(themeUtils.isChristmas() ? christmasTheme : isLight ? lightTheme : darkTheme);
+    return createTheme(t, {
       typography: {
         h1: {
           fontWeight: 600,
@@ -79,7 +81,8 @@ function App() {
           [t.breakpoints.only('xs')]: { fontSize: '1.5313rem' }
         }
       }});
-  }, [lightMode]);
+  }, [isLight]);
+
   const md = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
