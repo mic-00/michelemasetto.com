@@ -57,8 +57,8 @@ const now = new Date(Date.now());
 function App() {
 
   const isLight = useSelector(state => state.lightMode);
-  const isChristmas = new Date(`08/11/${now.getFullYear()}`) <= now && now <= new Date(`06/01/${now.getFullYear() + 1}`);
-
+  const isChristmas = new Date(`12/08/${now.getFullYear()}`) <= now && now <= new Date(`01/06/${now.getFullYear() + 1}`);
+  
   let theme = useMemo(() => {
     let t = createTheme(isChristmas ? christmasTheme : isLight ? lightTheme : darkTheme);
     return createTheme(t, {
