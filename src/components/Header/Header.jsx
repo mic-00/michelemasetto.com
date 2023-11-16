@@ -129,7 +129,7 @@ function Header() {
                         {muted ? <VolumeOff /> : <VolumeUp />}
                       </IconButton>
                   }
-                  label={muted ? 'Attiva audio' : 'Disattiva audio'}
+                  label={muted ? t('audio_on') : t('audio_off')}
                   labelPlacement="start"
               />}
             </FormGroup> 
