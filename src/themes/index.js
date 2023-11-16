@@ -1,11 +1,11 @@
 import christmasTheme from "./christmas.js";
 import darkTheme from "./dark.js";
+import defaultTheme from "./default.js";
 import lightTheme from "./light.js";
 
-const themes = {
+export {
   christmasTheme,
   darkTheme,
+  defaultTheme,
   lightTheme
 };
-
-export default themes;
