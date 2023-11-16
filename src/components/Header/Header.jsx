@@ -18,11 +18,16 @@ import {
   Mail,
   Phone,
   Place,
-  Translate
+  Translate,
+  VolumeOff,
+  VolumeUp
 } from '@mui/icons-material';
+import { useState } from 'react';
 import { useSelector, useStore } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import profile from './1674239272817.jpg';
+import { themeUtils } from 'themes';
+import christmasAudio from './assets/1645874023710.mp3';
+import profile from './assets/1674239272817.jpg';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -71,17 +76,19 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-
 function Header() {
 
   const lightMode = useSelector((state) => state.lightMode);
+  const [muted, setMuted] = useState(true);
   const store = useStore();
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
+
   const { t } = useTranslation();
 
   return (
       <AppBar position="static" sx={{ paddingY: 2 }}>
+        {themeUtils.isChristmas() && <audio src={christmasAudio} muted={muted} autoPlay loop />}
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
           {md && (
               <Avatar src={profile} sx={{
@@ -100,7 +107,8 @@ function Header() {
             <FormGroup sx={{
               position: 'absolute',
               top: 0,
-              right: 32
+              right: 32,
+              zIndex: 9999
             }}>
               <FormControlLabel
                   control={
@@ -115,6 +123,15 @@ function Header() {
                   }
                   labelPlacement="start"
               />
+              {themeUtils.isChristmas() && <FormControlLabel
+                  control={
+                      <IconButton onClick={() => setMuted(!muted)}>
+                        {muted ? <VolumeOff /> : <VolumeUp />}
+                      </IconButton>
+                  }
+                  label={muted ? 'Attiva audio' : 'Disattiva audio'}
+                  labelPlacement="start"
+              />}
             </FormGroup> 
             <List>
               <ListItem>

@@ -15,8 +15,7 @@ import Education from "./components/sections/Education";
 import HardSkills from "./components/sections/HardSkills";
 import SoftSkills from "./components/sections/SoftSkills";
 import WorkExperiences from "./components/sections/WorkExperiences";
-import {christmasTheme, defaultTheme, darkTheme, lightTheme} from './themes';
-import christmasAudio from './christmas.mp3';
+import {christmasTheme, darkTheme, lightTheme, themeUtils} from './themes';
 import 'animate.css/animate.min.css';
 
 
@@ -52,15 +51,12 @@ const sections = [{
   content: <HardSkills />
 }];
 
-const now = new Date(Date.now());
-
 function App() {
 
   const isLight = useSelector(state => state.lightMode);
-  const isChristmas = new Date(`12/08/${now.getFullYear()}`) <= now && now <= new Date(`01/06/${now.getFullYear() + 1}`);
   
   let theme = useMemo(() => {
-    let t = createTheme(isChristmas ? christmasTheme : isLight ? lightTheme : darkTheme);
+    let t = createTheme(themeUtils.isChristmas() ? christmasTheme : isLight ? lightTheme : darkTheme);
     return createTheme(t, {
       typography: {
         h1: {
@@ -85,13 +81,12 @@ function App() {
           [t.breakpoints.only('xs')]: { fontSize: '1.5313rem' }
         }
       }});
-  }, [isLight, isChristmas]);
+  }, [isLight]);
 
   const md = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
       <ThemeProvider theme={theme}>
-        {isChristmas && <audio src={christmasAudio} autoPlay loop />}
         <CssBaseline />
         <Header />
         <Box sx={{ paddingX: 1, paddingY: 4 }}>
