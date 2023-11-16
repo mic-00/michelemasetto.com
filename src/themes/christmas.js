@@ -51,13 +51,13 @@ const christmasTheme = deepmerge(defaultTheme, {
               transform: 'translateY(0)'
             },
             '100%' : {
-              transform: 'translateY(450px)'
+              transform: 'translateY(50vh)'
             }
           },
           '&::before': {
             content: '""',
             position: 'fixed',
-            top: '0',
+            top: '-50vh',
             right: '0',
             bottom: '0',
             left: '0',
@@ -91,7 +91,7 @@ const christmasTheme = deepmerge(defaultTheme, {
             backgroundSize: '100%',
             backgroundRepeat: 'repeat',
             filter: 'blur(1px)',
-            animation: 'snow 2s linear infinite'
+            animation: 'snow 4s linear infinite'
           }
         }
       }
