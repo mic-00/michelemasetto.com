@@ -1,7 +1,7 @@
 import {List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
 import {Download} from "@mui/icons-material";
 import {collection, getDocs} from "firebase/firestore";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {firestore} from "firebase.js";
 
@@ -11,9 +11,11 @@ function Certifications() {
   const [ certifications, setCertifications ] = useState([]);
   const { t } = useTranslation();
 
-  getDocs(collection(firestore, 'certifications')).then(({ docs }) =>
-    setCertifications(docs.map(doc => doc.data()))
-  );
+  useEffect(() => {
+    getDocs(collection(firestore, 'certifications')).then(({ docs }) =>
+      setCertifications(docs.map(doc => doc.data()))
+    )
+  }, []);
 
   return (
       <List>
