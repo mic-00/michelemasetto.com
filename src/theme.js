@@ -1,4 +1,4 @@
-import { deepmerge } from '@mui/utils';
+import {deepmerge} from '@mui/utils';
 
 
 const lightColors = {

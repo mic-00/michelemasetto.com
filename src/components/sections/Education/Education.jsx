@@ -3,7 +3,7 @@ import {timelineItemClasses} from "@mui/lab/TimelineItem";
 import {Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
 import {CalendarMonth, Place, WorkspacePremium} from "@mui/icons-material";
 import {List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 
 function Education() {

@@ -1,35 +1,29 @@
-import degree from "./assets/degree.pdf";
-import diploma from "./assets/diploma.pdf";
-import unreal_engine_4 from "./assets/unreal_engine_4.pdf";
 import {List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
 import {Download} from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
+import {collection, getDocs} from "firebase/firestore";
+import {useState} from "react";
+import {useTranslation} from "react-i18next";
+import {firestore} from "firebase.js";
 
 
 function Certifications() {
 
+  const [ certifications, setCertifications ] = useState([]);
   const { t } = useTranslation();
-  
-  const certifications = [{
-    name: t('certifications', { returnObjects: true })[0],
-    href: diploma
-  }, {
-    name: t('certifications', { returnObjects: true })[1],
-    href: degree
-  }, {
-    name: t('certifications', { returnObjects: true })[2],
-    href: unreal_engine_4
-  }];
+
+  getDocs(collection(firestore, 'certifications')).then(({ docs }) =>
+    setCertifications(docs.map(doc => doc.data()))
+  );
 
   return (
       <List>
-        {certifications.map((c, key) => (
+        {certifications.map((certification, key) => (
             <ListItem key={key}>
-              <ListItemButton href={c.href} target="_blank">
+              <ListItemButton href={certification.downloadURL} target="_blank">
                 <ListItemIcon>
                   <Download />
                 </ListItemIcon>
-                { c.name }
+                { t(certification.name) }
               </ListItemButton>
             </ListItem>
         ))}

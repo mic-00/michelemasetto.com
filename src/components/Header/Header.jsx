@@ -20,8 +20,8 @@ import {
   Place,
   Translate
 } from '@mui/icons-material';
-import { useSelector, useStore } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import {useSelector, useStore} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 import profile from './1674239272817.jpg';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
