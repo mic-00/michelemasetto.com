@@ -65,7 +65,7 @@ function WorkExperiences() {
                 <TimelineDot color="primary">
                   <Work fontSize="small" />
                 </TimelineDot>
-                {key !== workTimeline.length - 1 && <TimelineConnector />}
+                {key !== workExperiences.length - 1 && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>
                 <Typography variant="h3">
