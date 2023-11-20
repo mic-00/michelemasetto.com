@@ -12,7 +12,7 @@ function SoftSkills() {
   useEffect(() => {
     getDocs(collection(firestore, 'soft_skills')).then(({ docs }) =>
       setSoftSkills(docs.map(doc => doc.data()))
-    )
+    );
   }, []);
 
   return (

@@ -10,7 +10,7 @@ function HardSkills() {
   useEffect(() => {
     getDocs(collection(firestore, 'hard_skills')).then(({ docs }) => 
       setHardSkills(docs.map(doc => doc.data()))
-    )
+    );
   }, []);
 
   return (

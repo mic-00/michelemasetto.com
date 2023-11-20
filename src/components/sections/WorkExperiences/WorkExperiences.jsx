@@ -1,8 +1,11 @@
+import {collection, getDocs} from "@firebase/firestore";
+import {CalendarMonth, Place, Work} from "@mui/icons-material";
 import TimelineOppositeContent, {timelineOppositeContentClasses} from "@mui/lab/TimelineOppositeContent";
 import {timelineItemClasses} from "@mui/lab/TimelineItem";
 import {Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
-import {CalendarMonth, Place, Work} from "@mui/icons-material";
 import {List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
+import {useEffect, useState} from "react";
+import {firestore} from "firebase.js";
 
 const workTimeline = [{
   name: 'Stagista',
@@ -33,6 +36,15 @@ const workTimeline = [{
 }];
 
 function WorkExperiences() {
+
+  const [ workExperiences, setWorkExperiences ] = useState([]);
+
+  useEffect(() => {
+    getDocs(collection(firestore, 'work_experiences')).then(({ docs }) => 
+      setWorkExperiences(docs.map(doc => doc.data()))
+    );
+  }, []);
+
   return (
       <Timeline sx={{
         '&': {
@@ -46,7 +58,7 @@ function WorkExperiences() {
           flexGrow: 1
         }
       }}>
-        {workTimeline.map((it, key) => (
+        {workExperiences.map((it, key) => (
             <TimelineItem key={key}>
               <TimelineOppositeContent></TimelineOppositeContent>
               <TimelineSeparator>
@@ -57,7 +69,7 @@ function WorkExperiences() {
               </TimelineSeparator>
               <TimelineContent>
                 <Typography variant="h3">
-                  {it.name}
+                  {it.role}
                 </Typography>
                 <List>
                   {it.place && (
@@ -73,7 +85,7 @@ function WorkExperiences() {
                       </ListItem>
                   )}
                 </List>
-                {it.content && (
+                {it.description && (
                     <Typography>{it.content}</Typography>
                 )}
               </TimelineContent>

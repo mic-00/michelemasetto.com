@@ -14,7 +14,7 @@ function Certifications() {
   useEffect(() => {
     getDocs(collection(firestore, 'certifications')).then(({ docs }) =>
       setCertifications(docs.map(doc => doc.data()))
-    )
+    );
   }, []);
 
   return (
