@@ -1,16 +1,24 @@
+import {collection, getDocs, orderBy, query} from "@firebase/firestore";
+import {CalendarMonth, Place, WorkspacePremium} from "@mui/icons-material";
 import TimelineOppositeContent, {timelineOppositeContentClasses} from "@mui/lab/TimelineOppositeContent";
 import {timelineItemClasses} from "@mui/lab/TimelineItem";
 import {Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
-import {CalendarMonth, Place, WorkspacePremium} from "@mui/icons-material";
 import {List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
-import { useTranslation } from "react-i18next";
+import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {firestore} from "firebase.js";
 
 
 function Education() {
 
-  const { t } = useTranslation();
+  const language = useSelector(state => state.language);
+  const [ education, setEducation ] = useState([]);
 
-  const timeline = t('education', { returnObjects: true });
+  useEffect(() => {
+    getDocs(query(collection(firestore, `${language}/translations/education`), orderBy('start')))
+        .then(({ docs }) => setEducation(docs.map(doc => doc.data()))
+    );
+  }, [ language ]);
 
   return (
       <Timeline sx={{
@@ -25,18 +33,18 @@ function Education() {
           flexGrow: 1
         }
       }}>
-        {timeline.map((it, key) => (
+        {education.map((it, key) => (
             <TimelineItem key={key}>
               <TimelineOppositeContent></TimelineOppositeContent>
               <TimelineSeparator>
                 <TimelineDot color="primary">
                   <WorkspacePremium fontSize="small" />
                 </TimelineDot>
-                {key !== timeline.length - 1 && <TimelineConnector />}
+                {key !== education.length - 1 && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>
                 <Typography variant="h3">
-                  {it.name}
+                  {it.degree}
                 </Typography>
                 <List>
                   {it.place && (

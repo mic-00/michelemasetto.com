@@ -1,39 +1,31 @@
-import angular_intermediate_certificate from "./assets/angular_intermediate_certificate.pdf";
-import degree from "./assets/degree.pdf";
-import diploma from "./assets/diploma.pdf";
-import unreal_engine_4 from "./assets/unreal_engine_4.pdf";
 import {List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
 import {Download} from "@mui/icons-material";
-import {useTranslation} from "react-i18next";
+import {collection, getDocs, orderBy, query} from "firebase/firestore";
+import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {firestore} from "firebase.js";
 
 
 function Certifications() {
 
-  const { t } = useTranslation();
-  
-  const certifications = [{
-    name: t('certifications', { returnObjects: true })[0],
-    href: diploma
-  }, {
-    name: t('certifications', { returnObjects: true })[1],
-    href: degree
-  }, {
-    name: t('certifications', { returnObjects: true })[2],
-    href: unreal_engine_4
-  }, {
-    name: t('certifications', { returnObjects: true })[3],
-    href: angular_intermediate_certificate
-  }];
+  const language = useSelector(state => state.language);
+  const [ certifications, setCertifications ] = useState([]);
+
+  useEffect(() => {
+    getDocs(query(collection(firestore, `${language}/translations/certifications`), orderBy('name')))
+        .then(({ docs }) => setCertifications(docs.map(doc => doc.data()))
+    );
+  }, [ language ]);
 
   return (
       <List>
-        {certifications.map((c, key) => (
+        {certifications.map((certification, key) => (
             <ListItem key={key}>
-              <ListItemButton href={c.href} target="_blank">
+              <ListItemButton href={certification.downloadURL} target="_blank">
                 <ListItemIcon>
                   <Download />
                 </ListItemIcon>
-                { c.name }
+                { certification.name }
               </ListItemButton>
             </ListItem>
         ))}

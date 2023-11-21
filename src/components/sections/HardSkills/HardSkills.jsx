@@ -1,17 +1,26 @@
 import {Chip, Grid} from "@mui/material";
+import {collection, getDocs, orderBy, query} from "firebase/firestore";
+import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {firestore} from "firebase.js";
 
-const hardSkills = [
-    "JavaScript", "TypeScript", "HTML", "CSS", "Figma", "Git", "PHP", "SQL", "React", "Angular", "Node.js",
-    "Redux", "D3.js", "Bootstrap", "AntDesign", "MUI", "Python", "Numpy", "Matplotlib", "C++", "Matlab", "Java",
-    "Unreal Engine 4"
-];
 
 function HardSkills() {
+
+  const language = useSelector(state => state.language);
+  const [hardSkills, setHardSkills] = useState([]);
+
+  useEffect(() => {
+    getDocs(query(collection(firestore, `${language}/translations/hard_skills`), orderBy('value')))
+        .then(({ docs }) => setHardSkills(docs.map(doc => doc.data()))
+    );
+  }, [ language ]);
+
   return (
       <Grid container spacing={1}>
         {hardSkills.map((skill, key) => (
             <Grid item key={key}>
-              <Chip label={skill} color="primary" />
+              <Chip label={skill.value} color="primary" />
             </Grid>
         ))}
       </Grid>

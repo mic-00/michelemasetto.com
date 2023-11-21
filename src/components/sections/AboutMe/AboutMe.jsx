@@ -1,5 +1,5 @@
 import {Box, Typography} from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 function AboutMe() {
 
