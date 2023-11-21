@@ -4,10 +4,11 @@ import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {firestore} from "firebase.js";
 
+
 function HardSkills() {
 
-  const [hardSkills, setHardSkills] = useState([]);
   const language = useSelector(state => state.language);
+  const [hardSkills, setHardSkills] = useState([]);
 
   useEffect(() => {
     getDocs(query(collection(firestore, `${language}/translations/hard_skills`), orderBy('value')))

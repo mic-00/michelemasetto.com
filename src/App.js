@@ -20,7 +20,7 @@ import Education from "components/sections/Education";
 import HardSkills from "components/sections/HardSkills";
 import SoftSkills from "components/sections/SoftSkills";
 import WorkExperiences from "components/sections/WorkExperiences";
-import {lightTheme, darkTheme} from "theme";
+import {christmasTheme, darkTheme, lightTheme, themeUtils} from "themes";
 import "animate.css/animate.min.css";
 
 
@@ -64,7 +64,7 @@ function App() {
   const store = useStore();
 
   let theme = useMemo(() => {
-    let t = createTheme(themeUtils.isChristmas() ? christmasTheme : isLight ? lightTheme : darkTheme);
+    let t = createTheme(themeUtils.isChristmas() ? christmasTheme : lightMode ? lightTheme : darkTheme);
     return createTheme(t, {
       typography: {
         h1: {

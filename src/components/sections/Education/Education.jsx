@@ -11,8 +11,8 @@ import {firestore} from "firebase.js";
 
 function Education() {
 
-  const [ education, setEducation ] = useState([]);
   const language = useSelector(state => state.language);
+  const [ education, setEducation ] = useState([]);
 
   useEffect(() => {
     getDocs(query(collection(firestore, `${language}/translations/education`), orderBy('start')))

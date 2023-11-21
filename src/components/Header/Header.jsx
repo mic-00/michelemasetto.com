@@ -31,9 +31,12 @@ import {
   VolumeOff,
   VolumeUp
 } from '@mui/icons-material';
+import {useState} from "react";
 import {useSelector, useStore} from 'react-redux';
 import {useTranslation} from 'react-i18next';
-import profile from './1674239272817.jpg';
+import {themeUtils} from "themes";
+import christmasAudio from "./assets/1645874023710.mp3";
+import profile from "./assets/1674239272817.jpg";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,

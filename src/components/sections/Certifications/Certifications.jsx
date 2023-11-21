@@ -8,8 +8,8 @@ import {firestore} from "firebase.js";
 
 function Certifications() {
 
-  const [ certifications, setCertifications ] = useState([]);
   const language = useSelector(state => state.language);
+  const [ certifications, setCertifications ] = useState([]);
 
   useEffect(() => {
     getDocs(query(collection(firestore, `${language}/translations/certifications`), orderBy('name')))

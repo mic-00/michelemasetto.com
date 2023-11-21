@@ -6,8 +6,8 @@ import {firestore} from "firebase.js";
 
 function SoftSkills() {
 
-  const [ softSkills, setSoftSkills ] = useState([]);
   const language = useSelector(state => state.language);
+  const [ softSkills, setSoftSkills ] = useState([]);
 
   useEffect(() => {
     getDocs(query(collection(firestore, `${language}/translations/soft_skills`), orderBy('value')))
