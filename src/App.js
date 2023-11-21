@@ -23,6 +23,7 @@ import WorkExperiences from "components/sections/WorkExperiences";
 import {lightTheme, darkTheme} from "theme";
 import "animate.css/animate.min.css";
 
+
 const sections = [{
   title: 'Sommario',
   xs: 12,
@@ -63,8 +64,8 @@ function App() {
   const store = useStore();
 
   let theme = useMemo(() => {
-    let t = createTheme(lightMode ? lightTheme : darkTheme);
-    return createTheme(lightMode ? lightTheme : darkTheme, {
+    let t = createTheme(themeUtils.isChristmas() ? christmasTheme : isLight ? lightTheme : darkTheme);
+    return createTheme(t, {
       typography: {
         h1: {
           fontWeight: 600,
