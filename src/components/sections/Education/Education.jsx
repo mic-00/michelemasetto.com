@@ -1,23 +1,24 @@
-import {collection, getDocs} from "@firebase/firestore";
+import {collection, getDocs, orderBy, query} from "@firebase/firestore";
 import {CalendarMonth, Place, WorkspacePremium} from "@mui/icons-material";
 import TimelineOppositeContent, {timelineOppositeContentClasses} from "@mui/lab/TimelineOppositeContent";
 import {timelineItemClasses} from "@mui/lab/TimelineItem";
 import {Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
 import {List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
-import {useTranslation} from "react-i18next";
+import {useSelector} from "react-redux";
 import {firestore} from "firebase.js";
 
 
 function Education() {
 
   const [ education, setEducation ] = useState([]);
+  const language = useSelector(state => state.language);
 
   useEffect(() => {
-    getDocs(collection(firestore, 'education')).then(({ docs }) =>
-      setEducation(docs.map(doc => doc.data()))
+    getDocs(query(collection(firestore, `${language}/translations/education`), orderBy('start')))
+        .then(({ docs }) => setEducation(docs.map(doc => doc.data()))
     );
-  }, []);
+  }, [ language ]);
 
   return (
       <Timeline sx={{

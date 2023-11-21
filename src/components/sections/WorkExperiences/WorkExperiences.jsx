@@ -1,49 +1,24 @@
-import {collection, getDocs} from "@firebase/firestore";
+import {collection, getDocs, orderBy, query} from "@firebase/firestore";
 import {CalendarMonth, Place, Work} from "@mui/icons-material";
 import TimelineOppositeContent, {timelineOppositeContentClasses} from "@mui/lab/TimelineOppositeContent";
 import {timelineItemClasses} from "@mui/lab/TimelineItem";
 import {Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
 import {List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 import {firestore} from "firebase.js";
 
-const workTimeline = [{
-  name: 'Stagista',
-  place: 'VISIONEIMPRESA S.r.l., Pernumia (PD)',
-  start: 'Luglio 2017',
-  end: 'Agosto 2017',
-  content: 'Tirocinio in ambito PCTO (Percorsi per le Competenze Trasversali e per l\'Orientamento).'
-}, {
-  name: 'Stagista',
-  place: 'Comune di San Pietro Viminario, San Pietro Viminario (PD)',
-  start: 'Luglio 2018',
-  end: 'Agosto 2018',
-  content: 'Tirocinio in ambito PCTO (Percorsi per le Competenze Trasversali e per l\'Orientamento). Sono state svolte le ' +
-      'seguenti attività: gestione database anagrafico dei cittadini del Comune; digitalizzazione di documenti provenienti dall\'' +
-      'archivio cartaceo.'
-}, {
-  name: 'Stagista - Sviluppatore front-end',
-  place: 'RiskApp S.r.l., Conselve (PD)',
-  start: 'Giugno 2022',
-  end: 'Settembre 2022',
-  content: 'Tirocinio curriculare universitario svolto al termine del percorso di studi. Sono state svolte le ' +
-      'seguenti attività: analisi, progettazione e sviluppo di funzionalità mancanti in un sistema di videoispezione.'
-}, {
-  name: 'Full-stack developer',
-  place: 'Scai Itec, Padova (PD)',
-  start: 'Maggio 2023',
-  end: '*'
-}];
 
 function WorkExperiences() {
 
   const [ workExperiences, setWorkExperiences ] = useState([]);
+  const language = useSelector(state => state.language);
 
   useEffect(() => {
-    getDocs(collection(firestore, 'work_experiences')).then(({ docs }) => 
-      setWorkExperiences(docs.map(doc => doc.data()))
+    getDocs(query(collection(firestore, `${language}/translations/work_experiences`), orderBy('start')))
+        .then(({ docs }) => setWorkExperiences(docs.map(doc => doc.data()))
     );
-  }, []);
+  }, [ language ]);
 
   return (
       <Timeline sx={{
@@ -86,7 +61,7 @@ function WorkExperiences() {
                   )}
                 </List>
                 {it.description && (
-                    <Typography>{it.content}</Typography>
+                    <Typography>{it.description}</Typography>
                 )}
               </TimelineContent>
             </TimelineItem>
