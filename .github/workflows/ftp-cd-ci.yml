@@ -1,0 +1,44 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build 🔨
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+    - name: Install dependencies
+      run: npm ci
+    - name: Build for production
+      run: npm run build
+    - name: Archive production artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: build
+        path: build
+  deploy:
+    name: Deploy ✈️
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@main
+    - name: Download artifact
+      uses: actions/download-artifact@main
+      with:
+        name: build
+        path: build
+    - name: Sync files to hosting
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ftp.michelemasetto.com
+        username: 15427740@aruba.it
+        password: ${{ secrets.ftp_password }}
+        local-dir: ./build/
+        server-dir: ./www.michelemasetto.com/
