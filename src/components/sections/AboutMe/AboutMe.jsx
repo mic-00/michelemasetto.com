@@ -3,11 +3,11 @@ import {useTranslation} from 'react-i18next';
 
 function AboutMe() {
 
-  const { t } = useTranslation();
+  const { t } = useTranslation(['aboutMe']);
 
   return (
       <Box>
-        { t('about_me', { returnObjects: true }).map((v, i) =>
+        { t('a', { returnObjects: true }).map((v, i) =>
             <Typography key={i}>{ v }</Typography>
         )}
       </Box>

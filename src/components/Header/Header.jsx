@@ -3,6 +3,9 @@ import {
   Avatar,
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
   FormControlLabel,
   FormGroup,
   Grid,
@@ -27,16 +30,14 @@ import {
   Mail,
   Phone,
   Place,
-  Translate,
-  VolumeOff,
-  VolumeUp
+  Translate
 } from '@mui/icons-material';
-import {useState} from "react";
+import {collection, getDocs, query} from "firebase/firestore";
+import {useEffect, useState} from "react";
 import {useSelector, useStore} from 'react-redux';
 import {useTranslation} from 'react-i18next';
-import {themeUtils} from "themes";
-import christmasAudio from "./assets/1645874023710.mp3";
-import profile from "./assets/1674239272817.jpg";
+import {firestore} from "firebase.js";
+import ImageViewer, { ImageViewerControls, ImageViewerItem } from 'components/ImageViewer';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -87,25 +88,43 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 function Header() {
 
+  const language = useSelector((state) => state.language);
+  const { t, i18n } = useTranslation(['header']);
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [ i18n, language ]);
+
   const lightMode = useSelector((state) => state.lightMode);
-  const [muted, setMuted] = useState(true);
+  const [ imageViewerRef, setImageViewerRef ] = useState();
+  const [ dialogOpen, setDialogOpen ] = useState(false);
+  const [ photos, setPhotos ] = useState([]);
   const store = useStore();
-  const { t } = useTranslation();
+
+  useEffect(() => {
+    getDocs(query(collection(firestore, `${language}/translations/photos`)))
+        .then(({ docs }) => setPhotos(docs.map(doc => doc.data()))
+    );
+  }, [ language ]);
 
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
       <AppBar position="static" sx={{ paddingY: 2 }}>
-        {themeUtils.isChristmas() && <audio src={christmasAudio} muted={muted} autoPlay loop />}
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
           {md && (
-              <Avatar src={profile} sx={{
-                width: '9.5rem',
-                height: 'auto',
-                marginRight: 4,
-                borderRadius: '50%'
-              }}>
+              <Avatar
+                  src={photos[0]?.downloadURL}
+                  onClick={() => setDialogOpen(true)}
+                  sx={{
+                    width: '9.5rem',
+                    height: 'auto',
+                    zIndex: 1299,
+                    marginRight: 4,
+                    cursor: 'pointer'
+                  }}
+              >
                 MM
               </Avatar>
           )}
@@ -117,7 +136,7 @@ function Header() {
               position: 'absolute',
               top: 0,
               right: 32,
-              zIndex: 9999
+              zIndex: 1299
             }}>
               <FormControlLabel
                   control={
@@ -128,28 +147,19 @@ function Header() {
                   }
                   label={!md
                       ? null
-                      : lightMode ? t('dark_mode') : t('light_mode')
+                      : lightMode ? t('dark') : t('light')
                   }
                   labelPlacement="start"
               />
-              {themeUtils.isChristmas() && <FormControlLabel
-                  control={
-                      <IconButton onClick={() => setMuted(!muted)}>
-                        {muted ? <VolumeOff /> : <VolumeUp />}
-                      </IconButton>
-                  }
-                  label={muted ? t('audio_on') : t('audio_off')}
-                  labelPlacement="start"
-              />}
             </FormGroup> 
             <List>
               <ListItem>
                 <ListItemIcon><Place /></ListItemIcon>
-                <ListItemText>{ t('residence') }</ListItemText>
+                <ListItemText>{t('residence')}</ListItemText>
               </ListItem>
               <ListItem>
                 <ListItemIcon><Cake /></ListItemIcon>
-                <ListItemText>28-03-2000</ListItemText>
+                <ListItemText>{t('birthday')}</ListItemText>
               </ListItem>
               <ListItem>
                 <ListItemIcon><DirectionsCar /></ListItemIcon>
@@ -157,7 +167,7 @@ function Header() {
               </ListItem>
               <ListItem>
                 <ListItemIcon><Translate /></ListItemIcon>
-                <ListItemText>{ t('languages') }</ListItemText>
+                <ListItemText>{t('languages', { joinArrays: ', ' })}</ListItemText>
               </ListItem>
             </List>
           </Box>
@@ -271,6 +281,23 @@ function Header() {
               </Grid>
             </Grid>
         )}
+        <Dialog
+            open={dialogOpen}
+            fullWidth={true}
+            maxWidth="md"
+            onClose={() => setDialogOpen(false)}
+        >
+          <DialogContent>
+            <ImageViewer ref={setImageViewerRef}>
+              {photos.map((photo, key) =>
+                <ImageViewerItem key={key} src={photo.downloadURL} />
+              )}
+            </ImageViewer>
+          </DialogContent>
+          <DialogActions sx={{ justifyContent: 'center' }}>
+            <ImageViewerControls imageViewer={imageViewerRef} />
+          </DialogActions>
+        </Dialog>
       </AppBar>
   );
 }

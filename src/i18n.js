@@ -1,15 +1,23 @@
-import i18n from 'i18next';
-import {initReactI18next} from 'react-i18next';
-import translationEN from './locales/en/translations.json';
-import translationIT from './locales/it/translations.json';
+import i18n from "i18next";
+import {initReactI18next} from "react-i18next";
+import headerEn from "components/Header/i18n-en.json";
+import headerIt from "components/Header/i18n-it.json";
+import imageViewerEn from "components/ImageViewer/i18n-en.json";
+import imageViewerIt from "components/ImageViewer/i18n-it.json";
+import aboutMeEn from "components/sections/AboutMe/i18n-en.json";
+import aboutMeIt from "components/sections/AboutMe/i18n-it.json";
 
 // the translations
 const resources = {
   en: {
-    translation: translationEN
+    header: headerEn,
+    imageViewer: imageViewerEn,
+    aboutMe: aboutMeEn
   },
   it: {
-    translation: translationIT
+    header: headerIt,
+    imageViewer: imageViewerIt,
+    aboutMe: aboutMeIt
   }
 };
 

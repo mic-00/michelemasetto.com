@@ -1,4 +1,4 @@
-import {useMemo, useRef, useState} from "react";
+import {useMemo, useState} from "react";
 import {useSelector, useStore} from "react-redux";
 import {
   Box,
@@ -21,8 +21,6 @@ import HardSkills from "components/sections/HardSkills";
 import SoftSkills from "components/sections/SoftSkills";
 import WorkExperiences from "components/sections/WorkExperiences";
 import {christmasTheme, darkTheme, lightTheme, themeUtils} from "themes";
-import "animate.css/animate.min.css";
-
 
 const sections = [{
   title: 'Sommario',
@@ -58,13 +56,13 @@ const sections = [{
 
 function App() {
 
-  const anchorRef = useRef();
   const lightMode = useSelector(state => state.lightMode);
+  const [ anchorRef, setAnchorRef ] = useState();
   const [ isMenuOpen, setMenuOpen ] = useState(false);
   const store = useStore();
 
   let theme = useMemo(() => {
-    let t = createTheme(themeUtils.isChristmas() ? christmasTheme : lightMode ? lightTheme : darkTheme);
+    let t = createTheme(!lightMode ? darkTheme : themeUtils.isChristmas() ? christmasTheme : lightTheme);
     return createTheme(t, {
       typography: {
         h1: {
@@ -115,7 +113,7 @@ function App() {
           </Grid>
         </Box>
         <Fab
-            ref={anchorRef}
+            ref={setAnchorRef}
             color="secondary"
             onClick={() => setMenuOpen(true)}
             sx={{ position: 'fixed', bottom: '2em', right: '2em' }}
@@ -123,7 +121,7 @@ function App() {
           <Translate />
         </Fab>
         <Menu
-            anchorEl={anchorRef.current}
+            anchorEl={anchorRef}
             onClose={() => setMenuOpen(false)}
             open={isMenuOpen}
         >
