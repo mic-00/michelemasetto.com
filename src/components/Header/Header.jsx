@@ -14,6 +14,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Skeleton,
   styled,
   Switch,
   Toolbar,
@@ -113,13 +114,16 @@ function Header() {
   return (
       <AppBar position="static" sx={{ paddingY: 2 }}>
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
-          {md && (
+          {md && photos.length === 0 && (
+              <Skeleton variant="circular" width="9.5rem" height="9.5rem" sx={{ marginRight: 4 }} />
+          )}
+          {md && photos.length > 0 && (
               <Avatar
                   src={photos[0]?.downloadURL}
                   onClick={() => setDialogOpen(true)}
                   sx={{
                     width: '9.5rem',
-                    height: 'auto',
+                    height: '9.5rem',
                     zIndex: 1299,
                     marginRight: 4,
                     cursor: 'pointer'
