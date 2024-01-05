@@ -4,20 +4,17 @@ import headerEn from "components/Header/i18n-en.json";
 import headerIt from "components/Header/i18n-it.json";
 import imageViewerEn from "components/ImageViewer/i18n-en.json";
 import imageViewerIt from "components/ImageViewer/i18n-it.json";
-import aboutMeEn from "components/sections/AboutMe/i18n-en.json";
-import aboutMeIt from "components/sections/AboutMe/i18n-it.json";
+
 
 // the translations
 const resources = {
   en: {
     header: headerEn,
-    imageViewer: imageViewerEn,
-    aboutMe: aboutMeEn
+    imageViewer: imageViewerEn
   },
   it: {
     header: headerIt,
-    imageViewer: imageViewerIt,
-    aboutMe: aboutMeIt
+    imageViewer: imageViewerIt
   }
 };
 
