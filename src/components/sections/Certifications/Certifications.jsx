@@ -1,4 +1,4 @@
-import {List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
+import {List, ListItem, ListItemButton, ListItemIcon, Skeleton} from "@mui/material";
 import {Download} from "@mui/icons-material";
 import {collection, getDocs, orderBy, query} from "firebase/firestore";
 import {useEffect, useState} from "react";
@@ -19,7 +19,15 @@ function Certifications() {
 
   return (
       <List>
-        {certifications.map((certification, key) => (
+        {certifications.length === 0 && (
+            <>
+              <Skeleton variant="text" height={50} />
+              <Skeleton variant="text" height={50} />
+              <Skeleton variant="text" height={50} />
+              <Skeleton variant="text" height={50} />
+            </>
+        )}
+        {certifications.length > 0 && certifications.map((certification, key) => (
             <ListItem key={key}>
               <ListItemButton href={certification.downloadURL} target="_blank">
                 <ListItemIcon>
