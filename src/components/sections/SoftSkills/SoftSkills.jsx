@@ -10,6 +10,7 @@ function SoftSkills() {
   const [ softSkills, setSoftSkills ] = useState([]);
 
   useEffect(() => {
+    setSoftSkills([]);
     getDocs(query(collection(firestore, `${language}/translations/soft_skills`), orderBy('value')))
         .then(({ docs }) => setSoftSkills(docs.map(doc => doc.data()))
     );

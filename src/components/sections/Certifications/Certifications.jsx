@@ -12,6 +12,7 @@ function Certifications() {
   const [ certifications, setCertifications ] = useState([]);
 
   useEffect(() => {
+    setCertifications([]);
     getDocs(query(collection(firestore, `${language}/translations/certifications`), orderBy('name')))
         .then(({ docs }) => setCertifications(docs.map(doc => doc.data()))
     );

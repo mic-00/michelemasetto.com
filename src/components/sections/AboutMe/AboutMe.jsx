@@ -10,6 +10,7 @@ function AboutMe() {
   const [ aboutMe, setAboutMe ] = useState([]);
 
   useEffect(() => {
+    setAboutMe([]);
     getDocs(query(collection(firestore, `${language}/translations/about_me`), orderBy('id')))
         .then(({ docs }) => setAboutMe(docs.map(doc => doc.data()))
     );

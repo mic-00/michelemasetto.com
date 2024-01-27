@@ -15,6 +15,7 @@ function Education() {
   const [ education, setEducation ] = useState([]);
 
   useEffect(() => {
+    setEducation([]);
     getDocs(query(collection(firestore, `${language}/translations/education`), orderBy('start')))
         .then(({ docs }) => setEducation(docs.map(doc => doc.data()))
     );

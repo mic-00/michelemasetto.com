@@ -103,6 +103,7 @@ function Header() {
   const store = useStore();
 
   useEffect(() => {
+    setPhotos([]);
     getDocs(query(collection(firestore, `${language}/translations/photos`)))
         .then(({ docs }) => setPhotos(docs.map(doc => doc.data()))
     );

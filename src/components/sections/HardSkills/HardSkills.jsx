@@ -11,6 +11,7 @@ function HardSkills() {
   const [hardSkills, setHardSkills] = useState([]);
 
   useEffect(() => {
+    setHardSkills([]);
     getDocs(query(collection(firestore, `${language}/translations/hard_skills`), orderBy('value')))
         .then(({ docs }) => setHardSkills(docs.map(doc => doc.data()))
     );

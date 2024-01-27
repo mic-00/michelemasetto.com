@@ -15,6 +15,7 @@ function WorkExperiences() {
   const language = useSelector(state => state.language);
 
   useEffect(() => {
+    setWorkExperiences([]);
     getDocs(query(collection(firestore, `${language}/translations/work_experiences`), orderBy('start')))
         .then(({ docs }) => setWorkExperiences(docs.map(doc => doc.data()))
     );
