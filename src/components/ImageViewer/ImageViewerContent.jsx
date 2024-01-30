@@ -18,7 +18,7 @@ function ImageViewerContent({ children }) {
 
   useEffect(() => {
     store.dispatch({ type: 'count', payload: children.length });
-  }, [ children ]);
+  }, [ store, children ]);
 
   return (
     <Box sx={{
