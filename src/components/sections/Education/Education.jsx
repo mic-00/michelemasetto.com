@@ -3,7 +3,7 @@ import {CalendarMonth, Place, WorkspacePremium} from "@mui/icons-material";
 import TimelineOppositeContent, {timelineOppositeContentClasses} from "@mui/lab/TimelineOppositeContent";
 import {timelineItemClasses} from "@mui/lab/TimelineItem";
 import {Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
-import {List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
+import {List, ListItem, ListItemIcon, ListItemText, Skeleton, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {firestore} from "firebase.js";
@@ -15,6 +15,7 @@ function Education() {
   const [ education, setEducation ] = useState([]);
 
   useEffect(() => {
+    setEducation([]);
     getDocs(query(collection(firestore, `${language}/translations/education`), orderBy('start')))
         .then(({ docs }) => setEducation(docs.map(doc => doc.data()))
     );
@@ -33,7 +34,37 @@ function Education() {
           flexGrow: 1
         }
       }}>
-        {education.map((it, key) => (
+        {education.length === 0 && (
+            <>
+              <TimelineItem>
+                <TimelineOppositeContent></TimelineOppositeContent>
+                <TimelineSeparator>
+                    <TimelineDot color="primary">
+                      <WorkspacePremium fontSize="small" />
+                    </TimelineDot>
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent>
+                    <Skeleton variant="text" height={60} />
+                    <Skeleton variant="rectangular" height={100} />
+                  </TimelineContent>
+              </TimelineItem>
+              <TimelineItem>
+                <TimelineOppositeContent></TimelineOppositeContent>
+                <TimelineSeparator>
+                    <TimelineDot color="primary">
+                      <WorkspacePremium fontSize="small" />
+                    </TimelineDot>
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent>
+                    <Skeleton variant="text" height={60} />
+                    <Skeleton variant="rectangular" height={100} />
+                  </TimelineContent>
+              </TimelineItem>
+            </>
+        )}
+        {education.length > 0 && education.map((it, key) => (
             <TimelineItem key={key}>
               <TimelineOppositeContent></TimelineOppositeContent>
               <TimelineSeparator>
