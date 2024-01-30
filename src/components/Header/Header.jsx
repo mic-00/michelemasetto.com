@@ -39,6 +39,7 @@ import {useTranslation} from 'react-i18next';
 import {firestore} from "firebase.js";
 import ImageViewer, { ImageViewerControls, ImageViewerItem } from 'components/ImageViewer';
 
+
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -96,7 +97,6 @@ function Header() {
   }, [ i18n, language ]);
 
   const lightMode = useSelector((state) => state.lightMode);
-  const [ imageViewerRef, setImageViewerRef ] = useState();
   const [ dialogOpen, setDialogOpen ] = useState(false);
   const [ photos, setPhotos ] = useState([]);
   const store = useStore();
@@ -288,14 +288,14 @@ function Header() {
             onClose={() => setDialogOpen(false)}
         >
           <DialogContent>
-            <ImageViewer ref={setImageViewerRef}>
+            <ImageViewer>
               {photos.map((photo, key) =>
                 <ImageViewerItem key={key} src={photo.downloadURL} />
               )}
             </ImageViewer>
           </DialogContent>
           <DialogActions sx={{ justifyContent: 'center' }}>
-            <ImageViewerControls imageViewer={imageViewerRef} />
+            <ImageViewerControls />
           </DialogActions>
         </Dialog>
       </AppBar>
